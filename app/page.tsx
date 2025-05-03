@@ -22,20 +22,20 @@ export default function Page() {
             href="/login"
             className="flex items-center gap-5 self-start rounded-lg bg-gray-950 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800 md:text-base"
           >
-            <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
+            <span>Sign in</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
         </div>
         <div className="flex items-center justify-center p-6 lg:w-3/5 lg:px-28 lg:py-10">
           {/* Add Hero Images Here */}
           <Image
-            src="/hero-desktop.jpg"
+            src="/desktopView.png"
             alt="heroImg"
             width={1000}
             height={760}
             className="hidden md:block"
           />
           <Image
-            src="/hero-mobile.jpg"
+            src="/mobileView.png"
             alt="heroImg"
             width={560}
             height={620}

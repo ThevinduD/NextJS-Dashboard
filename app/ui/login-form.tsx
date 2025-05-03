@@ -21,7 +21,7 @@ export default function LoginForm() {
   );
 
   return (
-    <form action={formAction} className="space-y-3">
+    <form action={formAction} className="space-y-2">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
         <h1 className={`${lusitana.className} mb-3 text-2xl`}>
           Please log in to continue.
@@ -68,14 +68,26 @@ export default function LoginForm() {
           </div>
         </div>
         <input type="hidden" name="redirectTo" value={callbackUrl} />
+
         <Button className="mt-4 w-full" aria-disabled={isPending}>
           Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
         </Button>
+
+        <p className="text-sm text-gray-700 mt-3 ml-1">
+          Log in using provided credentials
+        </p>
+        <p className="text-sm text-gray-700 mt-3 ml-1">
+          em : user@nextmail.com
+        </p>
+        <p className="text-sm text-gray-700  ml-1"> pw : 123456</p>
+
         <div className="flex h-8 items-end space-x-1">
           {errorMessage && (
             <>
               <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-              <p className="text-sm text-red-500">{errorMessage}</p>
+              <p className="text-sm text-red-500">
+                Invalid Credentials. Try again
+              </p>
             </>
           )}
         </div>
