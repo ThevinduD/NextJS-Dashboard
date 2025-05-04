@@ -1,7 +1,7 @@
 import postgres from 'postgres';
 import {
   CustomerField,
-  CustomersTableType,
+  FormattedCustomersTable,
   InvoiceForm,
   InvoicesTable,
   LatestInvoiceRaw,
@@ -25,9 +25,6 @@ export async function fetchRevenue() {
 
 export async function fetchLatestInvoices() {
   try {
-    
-    //Delaying for develop purpose
-    //await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const data = await sql<LatestInvoiceRaw[]>`
       SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
@@ -151,7 +148,6 @@ export async function fetchInvoiceById(id: string) {
 
     const invoice = data.map((invoice) => ({
       ...invoice,
-      // Convert amount from cents to dollars
       amount: invoice.amount / 100,
     }));
 
@@ -181,7 +177,7 @@ export async function fetchCustomers() {
 
 export async function fetchFilteredCustomers(query: string) {
   try {
-    const data = await sql<CustomersTableType[]>`
+    const data = await sql<FormattedCustomersTable[]>`
 		SELECT
 		  customers.id,
 		  customers.name,
@@ -211,3 +207,4 @@ export async function fetchFilteredCustomers(query: string) {
     throw new Error('Failed to fetch customer table.');
   }
 }
+

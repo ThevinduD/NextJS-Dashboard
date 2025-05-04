@@ -22,6 +22,18 @@ const FormSchema = z.object({
     date: z.string(),
 });
 
+const FormSchema2 = z.object({
+  name: z.string({
+    required_error: 'Please enter a name.',
+  }).min(1, 'Please enter a name.'),
+
+  email: z.string({
+    required_error: 'Please enter an valid email.',
+  }).email('Please enter an valid email.'),
+});
+
+
+
 export type State = {
     errors?: {
       customerId?: string[];
@@ -29,6 +41,14 @@ export type State = {
       status?: string[];
     };
     message?: string | null;
+};
+
+export type State2 = {
+  errors?: {
+    name?: string[];
+    email?: string[];
+  };
+  message?: string | null;
 };
 
 const CreateInvoice = FormSchema.omit({id:true, date:true})
@@ -106,6 +126,49 @@ export async function deleteInvoice(id: string) {
     revalidatePath('/dashboard/invoices');
 }
 
+
+//Customer actions
+const CreateCustomer = FormSchema2
+const randomId = Math.floor(Math.random()*100) + 1
+
+export async function createCustomer(prevState:State2, formdata:FormData){
+  const validatedFields = CreateCustomer.safeParse ({
+      name: formdata.get('name'),
+      email: formdata.get('email')
+  })
+
+  if (!validatedFields.success) {
+      return {
+        errors: validatedFields.error.flatten().fieldErrors,
+        message: 'Missing Fields. Failed to Create Customer.',
+      };
+  }
+
+  const { name, email } = validatedFields.data;
+  const imgUrl = `https://robohash.org/${randomId}.png`
+
+  try{
+    const existingEmail = await sql`
+      SELECT email FROM customers WHERE email = ${email}
+    `;
+    if (existingEmail.length > 0) {
+      return {
+        message: 'Email already exists. Please use a different email.'
+      };
+    }
+
+      await sql `INSERT INTO customers (name, email, image_url)
+      VALUES (${name}, ${email}, ${imgUrl})`;
+  }catch(error) {
+      console.log(error);
+      return {message: 'Database Error: Failed to Create Invoice.'}
+  }
+
+  revalidatePath('/dashboard/customers')
+  redirect('/dashboard/customers');
+}
+
+
 export async function authenticate(
     prevState: string | undefined,
     formData: FormData,
@@ -119,4 +182,6 @@ export async function authenticate(
       throw error;
     }
 }
+
+
 

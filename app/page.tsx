@@ -15,8 +15,8 @@ export default function Page() {
           <p
             className={`${lusitana.className} text-xl text-gray-800 md:text-3xl md:leading-normal`}
           >
-            This is an <strong>Invoice Management Dashboard</strong> , built
-            using Next.js App Router
+            This is an <strong>Invoice Management System Dashboard</strong> ,
+            built using Next.js App Router
           </p>
           <Link
             href="/login"
