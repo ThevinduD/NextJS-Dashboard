@@ -44,11 +44,11 @@ export type State = {
 };
 
 export type State2 = {
-  errors?: {
-    name?: string[];
-    email?: string[];
-  };
-  message?: string | null;
+    errors?: {
+      name?: string[];
+      email?: string[];
+    };
+    message?: string | null;
 };
 
 const CreateInvoice = FormSchema.omit({id:true, date:true})
@@ -127,6 +127,7 @@ export async function deleteInvoice(id: string) {
 }
 
 
+
 //Customer actions
 const CreateCustomer = FormSchema2
 const randomId = Math.floor(Math.random()*100) + 1
@@ -169,6 +170,47 @@ export async function createCustomer(prevState:State2, formdata:FormData){
 }
 
 
+
+const UpdateCustomer = FormSchema2
+
+export async function updateCustomer(id: string, prevState:State2, formdata:FormData){
+  const validatedFields = UpdateCustomer.safeParse ({
+      name: formdata.get('name'),
+      email: formdata.get('email')
+  })
+
+  if (!validatedFields.success) {
+      return {
+        errors: validatedFields.error.flatten().fieldErrors,
+        message: 'Missing Fields. Failed to Edit Customer.',
+      };
+  }
+
+  const { name, email } = validatedFields.data;
+
+  try{
+      await sql `
+        UPDATE customers
+        SET name = ${name}, email = ${email}
+        WHERE id = ${id}
+      `;
+  }catch(error) {
+      console.log(error);
+      return {message: 'Database Error: Failed to Create Customer.'}
+  }
+
+  revalidatePath('/dashboard/customers')
+  redirect('/dashboard/customers');
+}
+
+
+
+
+
+
+
+
+//Authenticate
 export async function authenticate(
     prevState: string | undefined,
     formData: FormData,

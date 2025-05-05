@@ -1,6 +1,9 @@
+"use client";
 import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { deleteInvoice } from "@/app/lib/action";
+import { useState } from "react";
+import ConfirmDelete from "@/components/ui/confirm-delete";
 
 export function CreateInvoice() {
   return (
@@ -27,17 +30,24 @@ export function UpdateInvoice({ id }: { id: string }) {
 
 export function DeleteInvoice({ id }: { id: string }) {
   const deleteInvoiceWithId = deleteInvoice.bind(null, id);
+  const [show, setShow] = useState(false);
 
   return (
-    <form action={deleteInvoiceWithId}>
+    <>
       <button
-        type="submit"
         className="rounded-md border p-2 bg-red-500 hover:bg-red-400"
+        onClick={() => setShow(true)}
       >
         <span className="sr-only">Delete</span>
         <TrashIcon className="w-5 text-white" />
       </button>
-    </form>
+      {show && (
+        <ConfirmDelete
+          deleteInvoiceWithId={deleteInvoiceWithId}
+          setShow={setShow}
+        />
+      )}
+    </>
   );
 }
 
@@ -56,7 +66,7 @@ export function CreateCustomer() {
 export function UpdateCustomer({ id }: { id: string }) {
   return (
     <Link
-      href={`/dashboard/invoices/${id}/edit`}
+      href={`/dashboard/customers/${id}/edit`}
       className="rounded-md border p-2 hover:bg-gray-100"
     >
       <PencilIcon className="w-5" />

@@ -141,8 +141,10 @@ export async function fetchInvoiceById(id: string) {
         invoices.id,
         invoices.customer_id,
         invoices.amount,
-        invoices.status
+        invoices.status,
+        customers.name
       FROM invoices
+      JOIN customers ON invoices.customer_id = customers.id
       WHERE invoices.id = ${id};
     `;
 
@@ -174,6 +176,25 @@ export async function fetchCustomers() {
     throw new Error('Failed to fetch all customers.');
   }
 }
+
+export async function fetchCustomerById(id: string) {
+  try {
+    const customers = await sql<CustomerField[]>`
+      SELECT
+        id,
+        name,
+        email
+      FROM customers
+      WHERE customers.id = ${id};
+    `;
+
+    return customers[0]
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch all customers.');
+  }
+}
+
 
 export async function fetchFilteredCustomers(query: string) {
   try {

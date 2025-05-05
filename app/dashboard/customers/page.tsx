@@ -1,6 +1,6 @@
-import Search from "@/app/ui/searchCustomer";
+import Search from "@/app/ui/customers/searchCustomer";
 import Table from "@/app/ui/customers/table";
-import { CreateCustomer } from "@/app/ui/invoices/buttons";
+import { CreateCustomer } from "@/app/ui/buttons";
 import { lusitana } from "@/app/ui/fonts";
 import { InvoicesTableSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";

@@ -1,5 +1,5 @@
 "use client";
-import { CustomerField, InvoiceForm } from "@/app/lib/definitions";
+import { InvoiceForm } from "@/app/lib/definitions";
 import {
   CheckIcon,
   ClockIcon,
@@ -11,13 +11,7 @@ import { Button } from "@/app/ui/button";
 import { updateInvoice, State } from "@/app/lib/action";
 import { useActionState } from "react";
 
-export default function EditInvoiceForm({
-  invoice,
-  customers,
-}: {
-  invoice: InvoiceForm;
-  customers: CustomerField[];
-}) {
+export default function EditInvoiceForm({ invoice }: { invoice: InvoiceForm }) {
   const initialState: State = { message: null, errors: {} };
   const updateInvoiceWithId = updateInvoice.bind(null, invoice.id);
   const [state, formAction] = useActionState(updateInvoiceWithId, initialState);
@@ -38,14 +32,9 @@ export default function EditInvoiceForm({
               defaultValue={invoice.customer_id}
               aria-describedby="customer-error"
             >
-              <option value="" disabled>
-                Select a customer
+              <option key={invoice.customer_id} value={invoice.customer_id}>
+                {invoice.name}
               </option>
-              {customers.map((customer) => (
-                <option key={customer.id} value={customer.id}>
-                  {customer.name}
-                </option>
-              ))}
             </select>
             <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
           </div>
@@ -93,7 +82,7 @@ export default function EditInvoiceForm({
                   name="status"
                   type="radio"
                   value="pending"
-                  defaultChecked={invoice.status === "pending"}
+                  defaultChecked={invoice.status === "Pending"}
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label
@@ -109,7 +98,7 @@ export default function EditInvoiceForm({
                   name="status"
                   type="radio"
                   value="paid"
-                  defaultChecked={invoice.status === "paid"}
+                  defaultChecked={invoice.status === "Paid"}
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label

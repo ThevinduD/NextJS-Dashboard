@@ -74,11 +74,18 @@ export type FormattedCustomersTable = {
 export type CustomerField = {
   id: string;
   name: string;
+  email: string;
 };
 
 export type InvoiceForm = {
   id: string;
   customer_id: string;
   amount: number;
-  status: 'pending' | 'paid';
+  status: 'Pending' | 'Paid',
+  name: string
+};
+
+export type ConfirmDeleteProps = {
+  deleteInvoiceWithId: () => Promise<void>;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
 };

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { fetchFilteredCustomers } from "@/app/lib/data";
-import { UpdateCustomer } from "../invoices/buttons";
+import { UpdateCustomer } from "../buttons";
 
 export default async function CustomersTable({ query }: { query: string }) {
   const customers = await fetchFilteredCustomers(query);
@@ -45,12 +45,19 @@ export default async function CustomersTable({ query }: { query: string }) {
                     </div>
                   </div>
 
-                  <div className="pt-4 text-sm">
-                    <p>{customer.total_invoices} invoices</p>
+                  <div className="flex w-full items-center justify-between pt-4">
+                    <div className="pt-4 text-sm">
+                      <p>{customer.total_invoices} invoices</p>
+                    </div>
+                    <div className="flex justify-center">
+                      <UpdateCustomer id={customer.id} />
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
+
+            {/* Desktop View */}
             <table className="hidden min-w-full rounded-md text-gray-900 xl:table">
               <thead className="rounded-md bg-gray-100 text-left text-sm font-normal">
                 <tr>
