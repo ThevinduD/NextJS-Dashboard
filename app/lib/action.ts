@@ -80,6 +80,7 @@ export async function createInvoice(prevState:State, formdata:FormData){
     }
 
     revalidatePath('/dashboard/invoices')
+    revalidatePath('/dashboard')
     redirect('/dashboard/invoices');
 }
 
@@ -118,12 +119,14 @@ export async function updateInvoice(
     }
    
     revalidatePath('/dashboard/invoices');
+    revalidatePath('/dashboard')
     redirect('/dashboard/invoices');
 }
 
 export async function deleteInvoice(id: string) {
     await sql `DELETE FROM invoices WHERE id = ${id}`;
     revalidatePath('/dashboard/invoices');
+    revalidatePath('/dashboard')
 }
 
 
@@ -166,6 +169,7 @@ export async function createCustomer(prevState:State2, formdata:FormData){
   }
 
   revalidatePath('/dashboard/customers')
+  revalidatePath('/dashboard')
   redirect('/dashboard/customers');
 }
 
@@ -200,6 +204,7 @@ export async function updateCustomer(id: string, prevState:State2, formdata:Form
   }
 
   revalidatePath('/dashboard/customers')
+  revalidatePath('/dashboard')
   redirect('/dashboard/customers');
 }
 
