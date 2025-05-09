@@ -14,7 +14,10 @@ import { useActionState } from "react";
 
 export default function Form({ customers }: { customers: CustomerField[] }) {
   const initialState: State = { message: null, errors: {} };
-  const [state, formAction] = useActionState(createInvoice, initialState);
+  const [state, formAction, isPending] = useActionState(
+    createInvoice,
+    initialState
+  );
 
   return (
     <form action={formAction}>
@@ -131,6 +134,9 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
                 </p>
               ))}
           </div>
+          {state?.message && (
+            <p className="mt-2 text-red-500 text-sm">{state.message}</p>
+          )}
         </fieldset>
       </div>
       <div className="mt-6 flex justify-end gap-4">
@@ -140,7 +146,9 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
         >
           Cancel
         </Link>
-        <Button type="submit">Create Invoice</Button>
+        <Button type="submit" aria-disabled={isPending}>
+          Create Invoice
+        </Button>
       </div>
     </form>
   );

@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import bcrypt from 'bcryptjs'; 
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -22,6 +23,7 @@ const FormSchema = z.object({
     date: z.string(),
 });
 
+
 const FormSchema2 = z.object({
   name: z.string({
     required_error: 'Please enter a name.',
@@ -30,6 +32,12 @@ const FormSchema2 = z.object({
   email: z.string({
     required_error: 'Please enter an valid email.',
   }).email('Please enter an valid email.'),
+});
+
+const RegistrationSchema = z.object({
+  name: z.string({ required_error: 'Please enter a name.' }).min(1, 'Please enter a name.'),
+  email: z.string({ required_error: 'Please enter a valid email.' }).email('Please enter a valid email.'),
+  password: z.string({ required_error: 'Please enter a valid password.' }).min(1, 'Please enter a valid password.'),
 });
 
 
@@ -50,6 +58,15 @@ export type State2 = {
     };
     message?: string | null;
 };
+
+export type State3 = {
+  errors?: {
+    name?: string[];
+    email?: string[];
+    password?: string[];
+  };
+  message?: string | null;
+}
 
 const CreateInvoice = FormSchema.omit({id:true, date:true})
 
@@ -211,10 +228,6 @@ export async function updateCustomer(id: string, prevState:State2, formdata:Form
 
 
 
-
-
-
-
 //Authenticate
 export async function authenticate(
     prevState: string | undefined,
@@ -229,6 +242,49 @@ export async function authenticate(
       throw error;
     }
 }
+
+//New Acc creation
+export async function registration(prevState: State3, formdata: FormData){
+  const validatedFields = RegistrationSchema.safeParse ({
+      name: formdata.get('name'),
+      email: formdata.get('email'),
+      password: formdata.get('password')
+  })
+
+  if (!validatedFields.success) {
+      return {
+        errors: validatedFields.error.flatten().fieldErrors,
+        message: 'Missing Fields. Failed to Create user.',
+      };
+  }
+
+  const { name, email, password } = validatedFields.data;
+
+
+  try{
+    const existingEmail = await sql`
+      SELECT email FROM users WHERE email = ${email}
+    `;
+    if (existingEmail.length > 0) {
+      return {
+        message: 'Email already exists. Please use a different email.'
+      };
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+      await sql `INSERT INTO users (name, email, password)
+      VALUES (${name}, ${email}, ${hashedPassword})`
+
+  }catch(error) {
+      console.log(error);
+      return {message: 'Database Error: Failed to Create user.'}
+  }
+
+  redirect('/login');
+
+}
+
 
 
 

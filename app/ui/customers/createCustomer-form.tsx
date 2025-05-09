@@ -8,7 +8,10 @@ import { useActionState } from "react";
 
 export default function Form() {
   const initialState: State2 = { message: null, errors: {} };
-  const [state, formAction] = useActionState(createCustomer, initialState);
+  const [state, formAction, isPending] = useActionState(
+    createCustomer,
+    initialState
+  );
 
   return (
     <form action={formAction}>
@@ -65,10 +68,10 @@ export default function Form() {
                     {error}
                   </p>
                 ))}
-              {state?.message && (
-                <p className="mt-2 text-red-500 text-sm">{state.message}</p>
-              )}
             </div>
+            {state?.message && (
+              <p className="mt-2 text-red-500 text-sm">{state.message}</p>
+            )}
           </div>
         </div>
       </div>
@@ -79,7 +82,9 @@ export default function Form() {
         >
           Cancel
         </Link>
-        <Button type="submit">Create customer</Button>
+        <Button type="submit" aria-disabled={isPending}>
+          Create customer
+        </Button>
       </div>
     </form>
   );

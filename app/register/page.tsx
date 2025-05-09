@@ -1,8 +1,8 @@
 import AcmeLogo from "@/app/ui/acme-logo";
-import LoginForm from "@/app/ui/login-form";
+import RegisterForm from "../ui/register-form";
 import { Suspense } from "react";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <main className="flex items-center justify-center">
       <div className="relative mx-auto flex w-full max-w-[400px] flex-col p-4 mt-3">
@@ -12,7 +12,7 @@ export default function LoginPage() {
           </div>
         </div>
         <Suspense>
-          <LoginForm />
+          <RegisterForm />
         </Suspense>
       </div>
     </main>
