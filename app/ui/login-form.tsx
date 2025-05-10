@@ -11,6 +11,7 @@ import { Button } from "./button";
 import { useActionState } from "react";
 import { authenticate } from "../lib/action";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 export default function LoginForm() {
   const searchParams = useSearchParams();
@@ -75,9 +76,9 @@ export default function LoginForm() {
 
         <p className="text-sm text-gray-700 ml-1 mt-2">
           Don&apos;t have an account?&nbsp;
-          <a href="/register" className="underline text-gray-800">
+          <Link href="/register" className="underline text-gray-800">
             Create one
-          </a>
+          </Link>
         </p>
 
         <p className="text-sm text-gray-700 mt-4 ml-1">
