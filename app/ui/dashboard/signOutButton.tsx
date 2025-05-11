@@ -1,4 +1,3 @@
-// components/SignOutButton.tsx
 "use client";
 
 import { useFormStatus } from "react-dom";
@@ -15,16 +14,11 @@ export function SignOutButton() {
       disabled={pending}
     >
       {pending ? (
-        <>
-          <ClipLoader size={20} color="black" />
-          <div className="hidden md:block">Sign Out</div>
-        </>
+        <ClipLoader size={22} color="black" />
       ) : (
-        <>
-          <PowerIcon className="w-6" />
-          <div className="hidden md:block">Sign Out</div>
-        </>
+        <PowerIcon className="w-6" />
       )}
+      <div className="hidden md:block">Sign Out</div>
     </button>
   );
 }

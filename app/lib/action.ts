@@ -9,7 +9,7 @@ import bcrypt from 'bcryptjs';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
-const FormSchema = z.object({
+const InvoiceSchema = z.object({
     id: z.string(),
     customerId: z.string({
       invalid_type_error: 'Please select a customer.',
@@ -24,7 +24,7 @@ const FormSchema = z.object({
 });
 
 
-const FormSchema2 = z.object({
+const CustomerSchema = z.object({
   name: z.string({
     required_error: 'Please enter a name.',
   }).min(1, 'Please enter a name.'),
@@ -68,8 +68,9 @@ export type State3 = {
   message?: string | null;
 }
 
-const CreateInvoice = FormSchema.omit({id:true, date:true})
 
+//Invoice Actions ***
+const CreateInvoice = InvoiceSchema.omit({id:true, date:true})
 export async function createInvoice(prevState:State, formdata:FormData){
     const validatedFields = CreateInvoice.safeParse ({
         customerId: formdata.get('customerId'),
@@ -102,8 +103,7 @@ export async function createInvoice(prevState:State, formdata:FormData){
 }
 
 
-const UpdateInvoice = FormSchema.omit({id:true, date:true})
-
+const UpdateInvoice = InvoiceSchema.omit({id:true, date:true})
 export async function updateInvoice(
     id: string,
     prevState: State,
@@ -148,10 +148,9 @@ export async function deleteInvoice(id: string) {
 
 
 
-//Customer actions
-const CreateCustomer = FormSchema2
+//Customer actions ***
+const CreateCustomer = CustomerSchema
 const randomId = Math.floor(Math.random()*100) + 1
-
 export async function createCustomer(prevState:State2, formdata:FormData){
   const validatedFields = CreateCustomer.safeParse ({
       name: formdata.get('name'),
@@ -182,7 +181,7 @@ export async function createCustomer(prevState:State2, formdata:FormData){
       VALUES (${name}, ${email}, ${imgUrl})`;
   }catch(error) {
       console.log(error);
-      return {message: 'Database Error: Failed to Create Invoice.'}
+      return {message: 'Database Error: Failed to Create Customer.'}
   }
 
   revalidatePath('/dashboard/customers')
@@ -192,8 +191,7 @@ export async function createCustomer(prevState:State2, formdata:FormData){
 
 
 
-const UpdateCustomer = FormSchema2
-
+const UpdateCustomer = CustomerSchema
 export async function updateCustomer(id: string, prevState:State2, formdata:FormData){
   const validatedFields = UpdateCustomer.safeParse ({
       name: formdata.get('name'),
@@ -217,7 +215,7 @@ export async function updateCustomer(id: string, prevState:State2, formdata:Form
       `;
   }catch(error) {
       console.log(error);
-      return {message: 'Database Error: Failed to Create Customer.'}
+      return {message: 'Database Error: Failed to Update Customer.'}
   }
 
   revalidatePath('/dashboard/customers')

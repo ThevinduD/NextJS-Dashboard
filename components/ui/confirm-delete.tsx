@@ -1,6 +1,6 @@
 import { ConfirmDeleteProps } from "@/app/lib/definitions";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { DeleteSpinner } from "./delete-spinner";
+import { SubmitButton } from "./submit-delete";
 import React from "react";
 
 const ConfirmDelete = ({
@@ -23,7 +23,7 @@ const ConfirmDelete = ({
             Cancel
           </button>
           <form action={deleteInvoiceWithId}>
-            <DeleteSpinner />
+            <SubmitButton />
           </form>
         </div>
       </div>
