@@ -3,6 +3,7 @@
 ## Overview
 
 This is an Invoice management system dashboard designed with scalability, performance, and security in mind, the dashboard empowers users to create, manage, and track invoices and customers with ease. 
+
 Built using modern web technologies like Next.js App Router and TypeScript, the application features robust authentication, dynamic data handling, and a responsive interface that adapts beautifully across all devices. Integrated with a cloud-based Neon PostgreSQL database, it ensures reliable data storage and fast queries.
 
 ## Features 
@@ -16,7 +17,16 @@ Built using modern web technologies like Next.js App Router and TypeScript, the 
 ## Technologies 
 
 - Frontend: Built with HTML, CSS, and Tailwind CSS for responsive, modern UI components. Developed using TypeScript for industry-standard type safety.
-- Backend: Powered by Next.js — enabling full-stack capabilities and scalable backend logic.
+- Backend: Powered by Next.js, enabling full-stack capabilities and scalable backend logic.
 - Database: Integrated with Neon cloud database using PostgreSQL for reliable and high-performance data storage.
 - Authentication & Security: Secured with NextAuth.js and bcrypt for safe user authentication and password encryption.
+
+## Installation
+### Clone the Repository
+```bash
+git clone https://github.com/ThevinduD/NextJS-Dashboard.git
+cd NextJS-Dashboard
+npm install
+npm start
+```
 
