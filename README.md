@@ -1,8 +1,9 @@
-### Invoice Management Dashboard
+# Invoice Management Dashboard
 
 ## Overview
 
-This is an Invoice management system dashboard designed with scalability, performance, and security in mind, the dashboard empowers users to create, manage, and track invoices and customers with ease. Built using modern web technologies like Next.js App Router and TypeScript, the application features robust authentication, dynamic data handling, and a responsive interface that adapts beautifully across all devices. Integrated with a cloud-based Neon PostgreSQL database, it ensures reliable data storage and fast queries.
+This is an Invoice management system dashboard designed with scalability, performance, and security in mind, the dashboard empowers users to create, manage, and track invoices and customers with ease. 
+Built using modern web technologies like Next.js App Router and TypeScript, the application features robust authentication, dynamic data handling, and a responsive interface that adapts beautifully across all devices. Integrated with a cloud-based Neon PostgreSQL database, it ensures reliable data storage and fast queries.
 
 ## Features 
 
