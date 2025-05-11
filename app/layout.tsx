@@ -4,8 +4,8 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Next.js Dashboard",
-    default: "Next.js Dashboard",
+    template: "%s | Invoice Management Dashboard",
+    default: "Invoice Management Dashboard",
   },
   description: "Invoice management dashboard built with App Router.",
 };
