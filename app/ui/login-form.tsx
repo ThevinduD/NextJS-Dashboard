@@ -82,7 +82,7 @@ export default function LoginForm() {
         </p>
 
         <p className="text-sm text-gray-700 mt-4 ml-1">
-          Use the demo credentials to skip the login.
+          Use the demo credentials to skip the registration.
         </p>
         <p className="text-sm text-gray-700 mt-1 ml-1">
           em : user@nextmail.com
