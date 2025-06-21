@@ -16,7 +16,7 @@ Built using modern web technologies like Next.js App Router and TypeScript, the 
 
 ## Technologies 
 
-- **Frontend:** Built React and Tailwind CSS for responsive, modern UI components. Developed using TypeScript for industry-standard type safety.
+- **Frontend:** Built with React and Tailwind CSS for responsive, modern UI components. Developed using TypeScript for industry-standard type safety.
 - **Backend:** Powered by Next.js, enabling full-stack capabilities and scalable backend logic.
 - **Database:** Integrated with Neon cloud database using PostgreSQL for reliable and high-performance data storage.
 - **Authentication & Security:** Secured with NextAuth.js and bcrypt for safe user authentication and password encryption.
