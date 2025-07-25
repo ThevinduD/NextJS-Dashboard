@@ -10,7 +10,7 @@ export default function Page() {
       <div className="flex h-20 shrink-0 items-end rounded-lg bg-gray-950 p-4 md:h-52">
         <Logo />
       </div>
-      <div className="mt-4 flex grow flex-col gap-4 lg:flex-row animate-in duration-1000">
+      <div className="mt-4 flex grow flex-col gap-4 lg:flex-row animate-in fade-in duration-1000">
         <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 lg:w-2/5 lg:px-20">
           <p
             className={`${lusitana.className} text-xl text-gray-800 md:text-3xl md:leading-normal`}
