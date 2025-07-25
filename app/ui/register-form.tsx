@@ -6,6 +6,7 @@ import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "./button";
 import { useActionState } from "react";
 import { registration, State3 } from "../lib/action";
+import Link from "next/link";
 
 export default function RegisterForm() {
   const initialState: State3 = { message: null, errors: {} };
@@ -104,6 +105,13 @@ export default function RegisterForm() {
           Create the account{" "}
           <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
         </Button>
+
+        <p className="text-sm text-gray-700 ml-1 mt-2">
+          Already have an account?&nbsp;
+          <Link href="/login" className="underline text-gray-800">
+            Log in
+          </Link>
+        </p>
 
         <div className="mt-2">
           {state?.message && (

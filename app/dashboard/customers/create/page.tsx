@@ -3,7 +3,7 @@ import Breadcrumbs from "@/app/ui/breadcrumbs";
 
 export default async function Page() {
   return (
-    <main>
+    <main className="animate-in fade-in duration-500">
       <Breadcrumbs
         breadcrumbs={[
           { label: "Customers", href: "/dashboard/customers" },

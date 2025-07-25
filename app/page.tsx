@@ -15,8 +15,8 @@ export default function Page() {
           <p
             className={`${lusitana.className} text-xl text-gray-800 md:text-3xl md:leading-normal`}
           >
-            This is an <strong>Invoice Management System Dashboard</strong> ,
-            built using Munna App Router
+            Manage your invoices with ease using this{" "}
+            <strong>Invoice Management Dashboard</strong>
           </p>
           <Link
             href="/login"

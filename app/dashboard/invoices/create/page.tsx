@@ -6,7 +6,7 @@ export default async function Page() {
   const customers = await fetchCustomers();
 
   return (
-    <main>
+    <main className="animate-in fade-in duration-500">
       <Breadcrumbs
         breadcrumbs={[
           { label: "Invoices", href: "/dashboard/invoices" },

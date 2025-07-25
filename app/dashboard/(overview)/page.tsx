@@ -11,7 +11,7 @@ import CardWrapper from "@/app/ui/dashboard/cards";
 
 export default async function Page() {
   return (
-    <main>
+    <main className="animate-in fade-in duration-500">
       <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
         Dashboard
       </h1>
