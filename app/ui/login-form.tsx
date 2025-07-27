@@ -84,10 +84,8 @@ export default function LoginForm() {
         <p className="text-sm text-gray-700 mt-4 ml-1">
           Use demo credentials to skip the registration.
         </p>
-        <p className="text-sm text-gray-700 mt-1 ml-1">
-          em : user@nextmail.com
-        </p>
-        <p className="text-sm text-gray-700  ml-1"> pw : 123456</p>
+        <p className="text-sm text-gray-700 mt-1 ml-1">em : user@next.com</p>
+        <p className="text-sm text-gray-700  ml-1"> pw : 123@abc</p>
 
         <div className="flex h-8 items-end space-x-1">
           {errorMessage && (
