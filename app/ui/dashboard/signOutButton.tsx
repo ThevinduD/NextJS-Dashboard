@@ -2,7 +2,6 @@
 
 import { useFormStatus } from "react-dom";
 import { PowerIcon } from "@heroicons/react/24/outline";
-import { ClipLoader } from "react-spinners";
 
 export function SignOutButton() {
   const { pending } = useFormStatus();
