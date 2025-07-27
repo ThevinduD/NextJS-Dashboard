@@ -14,11 +14,16 @@ export function SignOutButton() {
       disabled={pending}
     >
       {pending ? (
-        <ClipLoader size={22} color="black" />
+        <>
+          <PowerIcon className="w-6" />
+          <div className="hidden md:block">Signing Out...</div>
+        </>
       ) : (
-        <PowerIcon className="w-6" />
+        <>
+          <PowerIcon className="w-6" />
+          <div className="hidden md:block">Sign Out</div>
+        </>
       )}
-      <div className="hidden md:block">Sign Out</div>
     </button>
   );
 }
